@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Defines rectangle class."""
+
+
 class Rectangle:
     """Represent rectangle."""
     def __init__(self, width=0, height=0):
@@ -44,7 +46,9 @@ class Rectangle:
 
     def perimeter(self):
         """Return the perimeter of the rectangle."""
+
         return (self.__width * 2) + (self.__height * 2)
+
     def __str__(self):
         """Return the printable representation of the rectangle.
 
