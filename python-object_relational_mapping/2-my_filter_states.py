@@ -1,21 +1,24 @@
 #!/usr/bin/python3
-""" Script that lists all states with a name starting with N from the database
-hbtn_0e_0_usa
+""" Script  that takes in an argument and displays all values in the states
+table of hbtn_0e_0_usa where name matches the argument.
 """
-
 
 if __name__ == "__main__":
     import sys
     import MySQLdb
 
     serv = MySQLdb.connect(host="localhost",  port=3306,
-                           user=sys.argv[1], passwd=sys.argv[2],
-                           db=sys.argv[3])
+                           user=sys.argv[1], password=sys.argv[2],
+                           database=sys.argv[3])
 
     c = serv.cursor()
-    c.execute("SELECT * FROM states")
+    stateName = sys.argv[4]
+    c.execute(
+        "SELECT * FROM states WHERE name='{}' ORDER BY id ASC".format(
+            stateName))
     rows = c.fetchall()
     for row in rows:
+        if row[1] == stateName:
             print(row)
     c.close()
     serv.close()
