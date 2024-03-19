@@ -14,7 +14,7 @@ if __name__ == "__main__":
     c = serv.cursor()
     stateName = sys.argv[4]
     c.execute(
-        "SELECT * FROM states WHERE name='{}' ORDER BY id ASC".format(
+        "SELECT * FROM states".format(
             stateName))
     rows = c.fetchall()
     for row in rows:
