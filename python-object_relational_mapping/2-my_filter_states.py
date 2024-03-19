@@ -3,22 +3,23 @@
 table of hbtn_0e_0_usa where name matches the argument.
 """
 
-if __name__ == "__main__":
-    import sys
+
+def select_states():
+    """List all the states in the states table"""
     import MySQLdb
+    from sys import argv
+    db = MySQLdb.connect(host="localhost",
+                         user=argv[1],
+                         passwd=argv[2],
+                         db=argv[3])
+    cur = db.cursor()
+    cur.execute("SELECT * FROM states WHERE name = '{}'".format(argv[4]))
+    rows = cur.fetchall()
+    for i in rows:
+        if i[1][0].isupper():
+            print(i)
+    db.close()
 
-    serv = MySQLdb.connect(host="localhost",  port=3306,
-                           user=sys.argv[1], passwd=sys.argv[2],
-                           db=sys.argv[3])
 
-    c = serv.cursor()
-    stateName = sys.argv[4]
-    c.execute(
-        "SELECT * FROM states".format(
-            stateName))
-    rows = c.fetchall()
-    for row in rows:
-        if row[1] == stateName:
-            print(row)
-    c.close()
-    serv.close()
+if __name__ == "__main__":
+    select_states()
